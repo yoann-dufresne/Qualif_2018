@@ -16,7 +16,7 @@ def solve (problem):
 
 	for car in cars:
 		while True:
-			min_time, ride, idx = car.get_nearest_ride(rides, problem[5])
+			min_time, ride, idx = car.get_nearest_ride(rides, problem[5], problem[-2])
 
 			if ride == -1:
 				break

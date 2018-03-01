@@ -7,8 +7,9 @@ class Car:
 		self.y = 0
 		self.t = 0
 
-	def get_nearest_ride (self, rides, max_time):
+	def get_nearest_ride (self, rides, max_time, bonus):
 		min_time = 1000000
+		min_modified_time = 1000000
 		min_ride = -1
 		min_idx = -1
 
@@ -16,15 +17,18 @@ class Car:
 			if self.t + self.dist(ride) > ride.last_call:
 				continue
 
-			time = max(ride.start_time, self.t + self.dist(ride))
+			start_time = max(ride.start_time, self.t + self.dist(ride))
 
-			if time > max_time:
+			if start_time + ride.duration > max_time:
 				continue
+
+			modified_time = start_time - bonus if start_time == ride.start_time else start_time
 			
-			if time < min_time:
-				min_time = time
+			if modified_time < min_modified_time:
+				min_time = start_time
 				min_ride = ride
 				min_idx = list_idx
+				min_modified_time = modified_time
 
 		return min_time, min_ride, min_idx
 
