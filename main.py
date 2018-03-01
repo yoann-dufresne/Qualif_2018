@@ -19,16 +19,8 @@ def main ():
 
 	name = args.filename.split("/")[-1].split('.')[0]
 
-	pizza, params = parse_problem (args.filename)
-
+	toto = parse_problem (args.filename)
 	sol = Solution(pizza)
-	if args.sol:
-		sol.load_solution(args.sol)
-	else:
-		sol = solver_random.generate_solution(pizza)
-
-	# sol = solver.generate_solution(sol, name)
-	sol.save_solution(name)
 
 	return 0
 
