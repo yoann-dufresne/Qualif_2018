@@ -3,7 +3,9 @@
 import sys
 import argparse
 
+from ride import Ride
 from solution import Solution
+from naive import solve
 import os.path
 
 
@@ -16,8 +18,8 @@ def main ():
 	name = args.filename.split("/")[-1].split('.')[0]
 
 	problem = parse_problem (args.filename)
-	print(problem)
-	sol = Solution(problem[2])
+	sol = solve(problem)
+	print(sol.to_string())
 
 	return 0
 
@@ -29,7 +31,7 @@ def parse_problem (filename):
 
 		rides = []
 		for ride_idx in range(nb_rides):
-			rides.append(tuple([ride_idx, *[int(x) for x in file.readline().strip().split()]]))
+			rides.append(Ride(ride_idx, tuple([*[int(x) for x in file.readline().strip().split()]])))
 
 	return nb_rows, nb_cols, nb_cars, nb_rides, bonus, steps, rides
 
