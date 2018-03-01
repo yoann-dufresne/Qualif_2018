@@ -22,5 +22,19 @@ class Ride:
 		return dispos
 
 
+	def get_nearest (self, cars):
+		nearest = -1
+		min_dist = 1000000
+
+		for car in cars:
+			dist = car[3] + abs(car[0] - self.start[0]) + abs(car[1] - self.start[1])
+			
+			if dist <= min_dist:
+				min_dist = dist
+				nearest = car[0]
+
+		return nearest
+
+
 
 

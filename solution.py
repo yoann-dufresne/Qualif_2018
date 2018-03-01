@@ -10,7 +10,6 @@ class Solution:
 		string = ""
 
 		for car in self.cars:
-			string += "{} {}\n".format(len(car), " ".join(car))
+			string += "{} {}\n".format(len(car), " ".join(map(str, car)))
 
 		return string
-		
