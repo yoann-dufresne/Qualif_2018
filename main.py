@@ -3,11 +3,7 @@
 import sys
 import argparse
 
-import slices
 from solution import Solution
-import solver_random
-import solver_hill_climbing as solver
-
 import os.path
 
 
@@ -19,8 +15,9 @@ def main ():
 
 	name = args.filename.split("/")[-1].split('.')[0]
 
-	toto = parse_problem (args.filename)
-	sol = Solution(pizza)
+	problem = parse_problem (args.filename)
+	print(problem)
+	sol = Solution(problem[2])
 
 	return 0
 
@@ -28,14 +25,13 @@ def main ():
 def parse_problem (filename):
 	with open(filename, "r") as file:
 		header = file.readline().strip()
-		nb_rows, nb_cols, min_mushrooms, max_size = [int(x) for x in header.split()]
+		nb_rows, nb_cols, nb_cars, nb_rides, bonus, steps = [int(x) for x in header.split()]
 
-		pizza = []
-		for i in range(nb_rows):
-			row = file.readline().strip()
-			pizza.append([True if x=='M' else False for x in row])
+		rides = []
+		for ride_idx in range(nb_rides):
+			rides.append(tuple([ride_idx, *[int(x) for x in file.readline().strip().split()]]))
 
-	return pizza, (max_size, min_mushrooms)
+	return nb_rows, nb_cols, nb_cars, nb_rides, bonus, steps, rides
 
 
 if __name__ == "__main__":
