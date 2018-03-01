@@ -5,7 +5,7 @@ import argparse
 
 from ride import Ride
 from solution import Solution
-from naive import solve
+from maive_car import solve
 import os.path
 
 
